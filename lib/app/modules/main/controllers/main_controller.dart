@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../themes_data/dark_themes.dart';
-import '../../../themes_data/light_themes.dart';
+import '../../../../themes_data/dark_themes.dart';
+import '../../../../themes_data/light_themes.dart';
 
 class MainController extends GetxController {
   final box = GetStorage();

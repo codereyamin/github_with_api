@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../../widgets/common_app_bar.dart';
 
-import '../../../widgets/common_app_bar.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {

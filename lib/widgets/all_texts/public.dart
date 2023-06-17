@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../modules/main/controllers/main_controller.dart';
+import '../../app/modules/main/controllers/main_controller.dart';
 
 class PublicTextWidget extends StatelessWidget {
   const PublicTextWidget({super.key});

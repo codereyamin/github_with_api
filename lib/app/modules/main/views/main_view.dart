@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+
+import '../../../../themes_data/dark_themes.dart';
+import '../../../../themes_data/light_themes.dart';
 import '../../../routes/app_pages.dart';
-import '../../../themes_data/dark_themes.dart';
-import '../../../themes_data/light_themes.dart';
 import '../../login/views/login_view.dart';
 import '../controllers/main_controller.dart';
 

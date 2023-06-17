@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../modules/main/controllers/main_controller.dart';
-import '../../modules/repoItemView/views/repo_item_view_view.dart';
+import '../../app/modules/itemView/views/item_view_view.dart';
+import '../../app/modules/main/controllers/main_controller.dart';
 import '../all_texts/public.dart';
 import '../all_texts/repo_name.dart';
 import '../all_texts/update_on.dart';
@@ -22,7 +22,7 @@ class ListViewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorCondition = Get.put(MainController());
     return GestureDetector(
-      onTap: () => Get.to(const RepoItemViewView(), arguments: url),
+      onTap: () => Get.to(const ItemViewView(), arguments: url),
       child: Obx(
         () => Container(
           decoration: BoxDecoration(

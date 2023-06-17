@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-import '../../../widgets/all_texts/common_text.dart';
-import '../../../widgets/common_app_bar.dart';
-import '../../../widgets/views_Card/grid_view_card.dart';
-import '../../../widgets/views_Card/list_view_card.dart';
+import '../../../../widgets/all_texts/common_text.dart';
+import '../../../../widgets/common_app_bar.dart';
+import '../../../../widgets/views_Card/grid_view_card.dart';
+import '../../../../widgets/views_Card/list_view_card.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {

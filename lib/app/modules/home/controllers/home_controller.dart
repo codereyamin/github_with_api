@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../widgets/all_texts/common_text.dart';
+import '../../../../widgets/all_texts/common_text.dart';
 import '../../main/controllers/main_controller.dart';
 import '../models/user_model.dart';
 import '../models/user_repo_model.dart';

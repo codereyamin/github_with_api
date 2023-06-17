@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
-class RepoItemViewController extends GetxController {
+class ItemViewController extends GetxController {
   late final WebViewController webController;
   @override
   void onInit() {
