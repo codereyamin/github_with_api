@@ -1,3 +1,4 @@
+// user repository model
 class UserRepoModel {
   UserRepoModel({
     required this.name,

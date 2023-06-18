@@ -1,3 +1,5 @@
+// user data model
+
 class UserModel {
   UserModel({
     required this.login,

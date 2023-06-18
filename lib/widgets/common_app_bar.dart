@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../app/modules/main/controllers/main_controller.dart';
 
+// this widget use global in app
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
     super.key,

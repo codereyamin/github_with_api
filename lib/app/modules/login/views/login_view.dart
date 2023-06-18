@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../widgets/common_app_bar.dart';
 
+import '../../main/controllers/main_controller.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -10,8 +11,10 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     Get.put(LoginController());
+    final colorController =
+        Get.put(MainController()); // this controller call using ui color change depend on themes
     return Scaffold(
-      appBar: const CommonAppBar(title: "User Input"),
+      appBar: const CommonAppBar(title: "User Name Input"),
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Container(
             margin: EdgeInsets.all(20.w),
@@ -25,20 +28,28 @@ class LoginView extends GetView<LoginController> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 5, color: Colors.grey.shade500)),
-                  child: TextField(
-                    controller: controller.inputTextController,
-                    decoration: const InputDecoration(
-                      hintText: "Enter your user name....",
-                      border: InputBorder.none,
-                      filled: true,
-                      fillColor: Colors.white,
+
+                // input text field
+                Obx(
+                  () => Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            width: 5,
+                            color: colorController.isDarkThemes.value == true
+                                ? Color.fromARGB(255, 142, 75, 75)
+                                : Colors.grey.shade500)),
+                    child: TextField(
+                      controller: controller.inputTextController,
+                      decoration: const InputDecoration(
+                        hintText: "Enter your user name....",
+                        border: InputBorder.none,
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -47,6 +58,8 @@ class LoginView extends GetView<LoginController> {
         SizedBox(
           height: 40.w,
         ),
+
+        // submit button
         ElevatedButton.icon(
             onPressed: () {
               controller.checkValue();

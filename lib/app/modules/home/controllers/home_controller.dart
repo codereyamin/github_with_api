@@ -12,17 +12,21 @@ class HomeController extends GetxController {
   Dio dio = Dio();
   UserModel? userModel;
   RxInt itemBuildSize = 0.obs;
-  RxList<UserRepoModel> userRepoModel = <UserRepoModel>[].obs;
+  RxList<UserRepoModel> userRepoList = <UserRepoModel>[].obs;
   RxBool isloading = false.obs;
+  RxBool isGridView = false.obs;
+
   @override
   void onInit() async {
     isloading.value = true;
-    final userName = Get.arguments;
-    await dataLoad(userName: userName);
+    final userName = Get.arguments; // receive user name
+    await dataLoad(userName: userName); // user data load function call
     isloading.value = false;
     super.onInit();
   }
 
+  // try user data load function
+  //error handel
   dataLoad({required String userName}) async {
     try {
       await onLodeUserData(username: userName);
@@ -33,29 +37,39 @@ class HomeController extends GetxController {
     }
   }
 
+// user data load function
   onLodeUserData({required String username}) async {
     final data = await dio.get("https://api.github.com/users/$username");
+    //succuss to user data load
     if (data.statusCode == 200) {
+      //convert json to dart
       userModel = UserModel.fromJson(data.data);
+
+      // call user repository data function
       await onLodeUserRepoData(username: username);
     }
   }
 
+// user repository data load function
   onLodeUserRepoData({required String username}) async {
     final data = await dio.get("https://api.github.com/users/$username/repos");
     if (data.statusCode == 200) {
+      // list of json data convert dart
       for (var element in data.data) {
-        userRepoModel.add(UserRepoModel.fromJson(element));
+        userRepoList.add(UserRepoModel.fromJson(element));
       }
-      itemBuildSize.value = userRepoModel.length;
+      // repository data length pick
+      // ui need to heigh build widget
+      itemBuildSize.value = userRepoList.length;
     }
   }
 
-  RxBool isGridView = false.obs;
+  //this function change between list view and grid view
   onChangeGridView() {
     isGridView.value = !isGridView.value;
   }
 
+  // error message function
   showErrDialog({required String userName}) => Get.bottomSheet(
       enterBottomSheetDuration: const Duration(milliseconds: 400),
       exitBottomSheetDuration: const Duration(milliseconds: 400),
@@ -65,10 +79,11 @@ class HomeController extends GetxController {
           height: 80.h,
           alignment: Alignment.center,
           color: const Color.fromARGB(255, 130, 122, 58),
-          child: Text("Not found $userName on website"),
+          child: Text("Not found this user $userName on github "),
         ),
       ));
 
+  /// short option show using this function
   showShortDialog() => Get.bottomSheet(
           enterBottomSheetDuration: const Duration(milliseconds: 400),
           exitBottomSheetDuration: const Duration(milliseconds: 400), StatefulBuilder(
@@ -91,7 +106,7 @@ class HomeController extends GetxController {
                       child: const CommonText(name: "Name a - z", fontSize: 18),
                     ),
                     onTap: () {
-                      nameA2Z();
+                      nameA2Z(); // call function
                     },
                   ),
                   InkWell(
@@ -100,7 +115,7 @@ class HomeController extends GetxController {
                       child: const CommonText(name: "Name z - a", fontSize: 18),
                     ),
                     onTap: () {
-                      nameZ2A();
+                      nameZ2A(); // call function
                     },
                   ),
                   InkWell(
@@ -109,7 +124,7 @@ class HomeController extends GetxController {
                       child: const CommonText(name: "Date order by create", fontSize: 18),
                     ),
                     onTap: () {
-                      dateCreate();
+                      dateCreate(); // call function
                     },
                   ),
                   InkWell(
@@ -118,7 +133,7 @@ class HomeController extends GetxController {
                       child: const CommonText(name: "Date order by update", fontSize: 18),
                     ),
                     onTap: () {
-                      dateUpdate();
+                      dateUpdate(); // call function
                     },
                   ),
                   InkWell(
@@ -127,7 +142,7 @@ class HomeController extends GetxController {
                       child: const CommonText(name: "Date order by push", fontSize: 18),
                     ),
                     onTap: () {
-                      datePush();
+                      datePush(); // call function
                     },
                   ),
                 ],
@@ -137,43 +152,48 @@ class HomeController extends GetxController {
         },
       ));
 
+  // this function order by alphabetic  a to z
   nameA2Z() {
-    userRepoModel.sort(
+    userRepoList.sort(
       (a, b) => a.name!.toLowerCase().compareTo(b.name!.toLowerCase()),
     );
-    userRepoModel.refresh();
+    userRepoList.refresh();
     Get.back();
   }
 
+  // this function order by alphabetic  z to a
   nameZ2A() {
-    userRepoModel.sort(
+    userRepoList.sort(
       (a, b) => b.name!.toLowerCase().compareTo(a.name!.toLowerCase()),
     );
-    userRepoModel.refresh();
+    userRepoList.refresh();
     Get.back();
   }
 
+// this function order by date on create
   dateCreate() {
-    userRepoModel.sort(
+    userRepoList.sort(
       (a, b) => a.createdAt!.compareTo(b.createdAt!),
     );
-    userRepoModel.refresh();
+    userRepoList.refresh();
     Get.back();
   }
 
+// this function order by date on update
   dateUpdate() {
-    userRepoModel.sort(
+    userRepoList.sort(
       (a, b) => b.updatedAt!.compareTo(a.updatedAt!),
     );
-    userRepoModel.refresh();
+    userRepoList.refresh();
     Get.back();
   }
 
+// this function order by date on push
   datePush() {
-    userRepoModel.sort(
+    userRepoList.sort(
       (a, b) => b.pushedAt!.compareTo(a.pushedAt!),
     );
-    userRepoModel.refresh();
+    userRepoList.refresh();
     Get.back();
   }
 }

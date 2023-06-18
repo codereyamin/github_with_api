@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:inilabs_assignment/app/modules/main/controllers/main_controller.dart';
 
 import '../../../../widgets/all_texts/common_text.dart';
 import '../../../../widgets/common_app_bar.dart';
@@ -13,11 +14,13 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final colorController =
+        Get.put(MainController()); // this controller call using ui color change depend on themes
     return Scaffold(
       appBar: const CommonAppBar(title: "Home View"),
       body: SingleChildScrollView(
         child: Obx(
-          () => controller.isloading.value == true
+          () => controller.isloading.value == true // hold screen and loading message show
               ? Container(
                   width: double.infinity,
                   height: 600.h,
@@ -60,6 +63,7 @@ class HomeView extends GetView<HomeController> {
                   SizedBox(
                     height: 20.h,
                   ),
+                  // user image and name
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -94,16 +98,19 @@ class HomeView extends GetView<HomeController> {
                   ),
                   CommonText(
                     maxLines: 5,
-                    name: controller.userModel!.bio ?? "",
+                    name: controller.userModel!.bio ?? "", // user bio
                   ),
                   SizedBox(
                     height: 20.h,
                   ),
+
+                  // user button section
                   Padding(
                     padding: EdgeInsets.only(left: 20.w, right: 20.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // sort item multiples order
                         GestureDetector(
                           onTap: () => controller.showShortDialog(),
                           child: const CommonText(
@@ -113,6 +120,7 @@ class HomeView extends GetView<HomeController> {
                         const CommonText(
                           name: "Repo List",
                         ),
+                        // list and grid button
                         IconButton(
                             onPressed: () {
                               controller.onChangeGridView();
@@ -121,27 +129,34 @@ class HomeView extends GetView<HomeController> {
                                 ? Icon(
                                     Icons.list,
                                     size: 30.h,
+                                    color: colorController.isDarkThemes.value == true
+                                        ? Colors.white
+                                        : Colors.black,
                                   )
                                 : Icon(
                                     Icons.grid_view,
                                     size: 25.h,
+                                    color: colorController.isDarkThemes.value == true
+                                        ? Colors.white
+                                        : Colors.black,
                                   )))
                       ],
                     ),
                   ),
                   Obx(
+                    // toggle between list and grid view
                     () => controller.isGridView.value == true
                         ? SizedBox(
                             height: 100 * controller.itemBuildSize.value.toDouble(),
                             child: GridView.builder(
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: controller.userRepoModel.length,
+                              itemCount: controller.userRepoList.length,
                               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2),
                               itemBuilder: (context, index) => GridViewCard(
-                                date: controller.userRepoModel[index].createdAt.toString(),
-                                repoName: controller.userRepoModel[index].name.toString(),
-                                url: controller.userRepoModel[index].htmlUrl.toString(),
+                                date: controller.userRepoList[index].createdAt.toString(),
+                                repoName: controller.userRepoList[index].name.toString(),
+                                url: controller.userRepoList[index].htmlUrl.toString(),
                               ),
                             ),
                           )
@@ -149,12 +164,12 @@ class HomeView extends GetView<HomeController> {
                             height: 140 * controller.itemBuildSize.value.toDouble(),
                             child: ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: controller.userRepoModel.length,
+                              itemCount: controller.userRepoList.length,
                               itemBuilder: (context, index) {
                                 return ListViewCard(
-                                  date: controller.userRepoModel[index].createdAt.toString(),
-                                  repoName: controller.userRepoModel[index].name.toString(),
-                                  url: controller.userRepoModel[index].htmlUrl.toString(),
+                                  date: controller.userRepoList[index].createdAt.toString(),
+                                  repoName: controller.userRepoList[index].name.toString(),
+                                  url: controller.userRepoList[index].htmlUrl.toString(),
                                 );
                               },
                             ),

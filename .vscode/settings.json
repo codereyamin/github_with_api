@@ -1,4 +1,13 @@
 {
-  "cSpell.words": ["cupertino", "screenutil"],
+  "cSpell.words": [
+    "ARGB",
+    "cupertino",
+    "docregion",
+    "enddocregion",
+    "Getx",
+    "isloading",
+    "screenutil",
+    "wkwebview"
+  ],
   "cmake.sourceDirectory": "C:/Users/Tuhin/Desktop/New folder (3)/inilabs_assignment/linux"
 }
