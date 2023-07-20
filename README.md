@@ -10,6 +10,6 @@
 
 ## Screenshots
 
-<img src="assets/screen_shot/name_1.png" width="256">   <img src="assets/screen_shot/#2.png" width="256">   <img src="assets/screen_shot/#3.png" width="256">   <img src="assets/screen_shot/#4.png" width="256">   <img src="assets/screen_shot/#5.png" width="256">   <img src="assets/screen_shot/#6.png" width="256">   <img src="assets/screen_shot/#7.png" width="256"> 
+<img src="assets/screen_shot/name_1.png" width="256">   <img src="assets/screen_shot/name_2.png" width="256">   <img src="assets/screen_shot/name_3.png" width="256">   <img src="assets/screen_shot/name_4.png" width="256">   <img src="assets/screen_shot/name_5.png" width="256">   <img src="assets/screen_shot/name_6.png" width="256">   <img src="assets/screen_shot/name_7.png" width="256"> 
 
 
